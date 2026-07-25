@@ -1,28 +1,23 @@
 const nodemailer = require('nodemailer');
 
-function parseBody(raw) {
-  const params = new URLSearchParams(raw);
-  const obj = {};
-  for (const [key, val] of params) {
-    obj[key] = val;
-  }
-  return obj;
-}
-
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
     return;
   }
 
-  let body;
-  if (req.headers['content-type']?.includes('application/json')) {
-    body = req.body;
-  } else {
-    body = parseBody(req.body);
-  }
+  let raw = '';
+  await new Promise((resolve, reject) => {
+    req.on('data', chunk => { raw += chunk; });
+    req.on('end', resolve);
+    req.on('error', reject);
+  });
 
-  const { name, email, subject, message } = body || {};
+  const params = new URLSearchParams(raw);
+  const name = params.get('name');
+  const email = params.get('email');
+  const subject = params.get('subject');
+  const message = params.get('message');
 
   if (!name || !email || !subject || !message) {
     res.writeHead(302, { Location: '/contact.html?status=error&msg=All+fields+are+required.' });
