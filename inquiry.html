@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Inquiry - InKZion Spectrum Ads</title>
+  <meta name="description" content="Send a printing inquiry to InKZion Spectrum Ads. Get a quote for apparel, banners, stickers, and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/logo.png" type="image/svg+xml">
+</head>
+<body>
+  <div class="page-loader"><div class="loader-spinner"></div></div>
+
+  <header class="header" id="header">
+    <div class="container">
+      <a href="index.html" class="logo"><span class="logo-icon"><img src="images/logo.png" alt="InKZion Spectrum Ads"></span>InKZion<span>Spectrum</span></a>
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="faqs.html" class="nav-link">FAQs</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="inquiry.html" class="nav-link active">Inquiry</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Send an Inquiry</h1>
+      <p>Tell us about your project and we'll provide a custom quote</p>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a><span>/</span><span class="current">Inquiry</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div data-aos="fade-right">
+          <div class="section-header" style="text-align:left;margin-bottom:32px;">
+            <span class="section-tag">Request a Quote</span>
+            <h2 class="section-title" style="font-size:1.8rem;">Tell Us What You Need</h2>
+            <p class="section-subtitle" style="margin:0;">Fill out the form and our team will get back to you within 24 hours with a detailed quotation.</p>
+          </div>
+          <div style="margin-top:32px;">
+            <div class="contact-info-card">
+              <div class="contact-info-icon"><i class="fas fa-check-circle" style="color:var(--color-success);"></i></div>
+              <div class="contact-info-text">
+                <h4>Fast Response</h4>
+                <p>We typically respond within 24 hours on business days.</p>
+              </div>
+            </div>
+            <div class="contact-info-card" style="margin-top:12px;">
+              <div class="contact-info-icon"><i class="fas fa-file-invoice" style="color:var(--color-primary);"></i></div>
+              <div class="contact-info-text">
+                <h4>Detailed Quotation</h4>
+                <p>Receive a complete breakdown of costs, timeline, and options.</p>
+              </div>
+            </div>
+            <div class="contact-info-card" style="margin-top:12px;">
+              <div class="contact-info-icon"><i class="fas fa-headset" style="color:var(--color-accent);"></i></div>
+              <div class="contact-info-text">
+                <h4>Expert Advice</h4>
+                <p>Not sure what you need? Our team will guide you to the best solution.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-aos="fade-left">
+          <div class="form-card">
+            <form action="/api/send-inquiry" method="POST" id="inquiryForm" enctype="multipart/form-data">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="name">Full Name</label>
+                  <input type="text" class="form-input" id="name" name="name" required placeholder="Juan Dela Cruz">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="email">Email Address</label>
+                  <input type="email" class="form-input" id="email" name="email" required placeholder="juan@example.com">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="phone">Phone Number</label>
+                  <input type="tel" class="form-input" id="phone" name="phone" placeholder="+63 912 345 6789">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="company">Company (Optional)</label>
+                  <input type="text" class="form-input" id="company" name="company" placeholder="Your Company Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="product">Product of Interest</label>
+                <select class="form-select" id="product" name="product">
+                  <option value="">Select a product...</option>
+                  <option value="Full Sublimation Round Neck Shirt">Full Sublimation Round Neck Shirt</option>
+                  <option value="Polo Shirt">Polo Shirt</option>
+                  <option value="Basketball Jersey">Basketball Jersey</option>
+                  <option value="Varsity Jacket">Varsity Jacket</option>
+                  <option value="Chinese Collar">Chinese Collar</option>
+                  <option value="Hoodies">Hoodies</option>
+                  <option value="Tarpaulin">Tarpaulin</option>
+                  <option value="Panaflex">Panaflex</option>
+                  <option value="Signage">Signage</option>
+                  <option value="Stand Banner">Stand Banner</option>
+                  <option value="Flyers">Flyers</option>
+                  <option value="Brochures">Brochures</option>
+                  <option value="Calling Cards">Calling Cards</option>
+                  <option value="Posters">Posters</option>
+                  <option value="Vinyl Sticker">Vinyl Sticker</option>
+                  <option value="Die-cut Sticker">Die-cut Sticker</option>
+                  <option value="Other">Other (please specify)</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="quantity">Estimated Quantity</label>
+                  <input type="number" class="form-input" id="quantity" name="quantity" min="1" placeholder="e.g. 50">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="deadline">Target Deadline</label>
+                  <input type="date" class="form-input" id="deadline" name="deadline">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="details">Project Details</label>
+                <textarea class="form-textarea" id="details" name="details" required placeholder="Describe your project in detail â€” include sizes, colors, design specs, and any other requirements..."></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="file">Upload Artwork / Reference File (Optional)</label>
+                <input type="file" class="form-input" id="file" name="file" accept=".ai,.psd,.pdf,.eps,.png,.jpg,.jpeg">
+                <small style="color:var(--color-text-muted);font-size:0.8rem;">Accepted formats: AI, PSD, PDF, EPS, PNG, JPG. Max 10MB.</small>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+                <i class="fas fa-paper-plane"></i> Submit Inquiry
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="footer-logo"><img src="images/logo.png" alt="InKZion Spectrum Ads" style="width:32px;height:32px;">InKZion<span>Spectrum</span></div>
+          <p class="footer-desc">InKZion Spectrum Ads is your trusted partner for premium printing solutions.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <div class="footer-links">
+            <a href="about.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> About Us</a>
+            <a href="products.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Products</a>
+            <a href="services.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Services</a>
+            <a href="gallery.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Gallery</a>
+            <a href="faqs.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> FAQs</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Our Services</h4>
+          <div class="footer-links">
+            <a href="products.html?filter=Apparel &amp; Sublimation"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Apparel Printing</a>
+            <a href="products.html?filter=Large Format &amp; Signage"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Large Format Printing</a>
+            <a href="products.html?filter=Marketing Materials"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Sticker Printing</a>
+            <a href="services.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Custom Merchandise</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Contact Info</h4>
+          <div class="footer-contact-item"><i class="fas fa-map-marker-alt footer-contact-icon"></i><span>123 Commercial Ave, Quezon City, Philippines</span></div>
+          <div class="footer-contact-item"><i class="fas fa-phone footer-contact-icon"></i><span>+63 (2) 8123 4567</span></div>
+          <div class="footer-contact-item"><i class="fas fa-envelope footer-contact-icon"></i><span>info@inkzionspectrumads.com</span></div>
+          <div class="footer-contact-item"><i class="fas fa-clock footer-contact-icon"></i><span>Mon - Sat: 8:00 AM - 6:00 PM</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 InKZion Spectrum Ads. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>
+
