@@ -147,18 +147,40 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ===== GALLERY LIGHTBOX =====
+// ===== GALLERY LIGHTBOX & FILTERS =====
 document.addEventListener('DOMContentLoaded', () => {
   const galleryItems = document.querySelectorAll('.gallery-item');
   if (!galleryItems.length) return;
 
+  // ---- Filter Tabs ----
+  const filters = document.querySelectorAll('.gallery-filter');
+  if (filters.length) {
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filters.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.filter;
+        galleryItems.forEach(item => {
+          if (cat === 'all' || item.dataset.category === cat) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  // ---- Lightbox ----
   let currentIndex = 0;
   const items = Array.from(galleryItems);
 
   function openLightbox(index) {
     currentIndex = index;
     const item = items[currentIndex];
+    if (item.style.display === 'none') return;
     const img = item.querySelector('img');
+    if (!img) return;
     const caption = item.querySelector('.gallery-overlay span');
     const src = img.getAttribute('src');
     const alt = img.getAttribute('alt');
@@ -201,11 +223,19 @@ document.addEventListener('DOMContentLoaded', () => {
     currentIndex += direction;
     if (currentIndex < 0) currentIndex = items.length - 1;
     if (currentIndex >= items.length) currentIndex = 0;
+    const item = items[currentIndex];
+    if (item.style.display === 'none') {
+      navigateLightbox(direction);
+      return;
+    }
     openLightbox(currentIndex);
   }
 
   galleryItems.forEach((item, index) => {
-    item.addEventListener('click', () => openLightbox(index));
+    item.addEventListener('click', (e) => {
+      if (item.querySelector('video')) return;
+      openLightbox(index);
+    });
   });
 
   document.addEventListener('click', (e) => {
