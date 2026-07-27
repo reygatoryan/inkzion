@@ -1344,6 +1344,18 @@ ul {
   line-height: 1.7;
 }
 
+.stats-video {
+  margin-top: 48px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+.stats-video video {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius-lg);
+}
+
 /* ===== GALLERY PAGE ===== */
 .gallery-grid {
   display: grid;
