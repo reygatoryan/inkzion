@@ -191,7 +191,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const featuredContainer = document.getElementById('featuredProducts');
   if (featuredContainer) {
     await loadProducts();
-    const featured = allProducts.slice(0, 4);
+    const featured = allProducts.slice(0, 3);
     renderProducts(featured, 'featuredProducts');
   }
 });
+

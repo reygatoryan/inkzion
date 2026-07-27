@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
-$to = "info@inkzionspectrumads.com";
+$to = "ryanreygato@gmail.com";
 
 $name = htmlspecialchars(trim($_POST["name"] ?? ""));
 $email = htmlspecialchars(trim($_POST["email"] ?? ""));
@@ -67,7 +67,7 @@ $email_body = "
 
 $headers = "MIME-Version: 1.0\r\n";
 $headers .= "Content-type: text/html; charset=UTF-8\r\n";
-$headers .= "From: $email\r\n";
+$headers .= "From: InKZion Spectrum Ads <ryanreygato@gmail.com>\r\n";
 $headers .= "Reply-To: $email\r\n";
 $headers .= "X-Mailer: PHP/" . phpversion();
 

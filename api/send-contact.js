@@ -46,7 +46,7 @@ module.exports = async (req, res) => {
 <head>
   <style>
     body { font-family: Arial, sans-serif; color: #333; }
-    .header { background: #2563eb; color: white; padding: 20px; text-align: center; }
+    .header { background: #475569; color: white; padding: 20px; text-align: center; }
     .content { padding: 30px; }
     .field { margin-bottom: 16px; }
     .label { font-weight: 700; color: #1e293b; }
@@ -70,7 +70,7 @@ module.exports = async (req, res) => {
     await transporter.sendMail({
       from: `"${name}" <${process.env.SMTP_USER}>`,
       replyTo: email,
-      to: process.env.CONTACT_EMAIL || 'info@inkzionspectrumads.com',
+      to: process.env.CONTACT_EMAIL || 'inkzionspectrum@gmail.com',
       subject: `Contact Form: ${subject} - InKZion Spectrum Ads`,
       html,
     });
