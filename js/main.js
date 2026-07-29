@@ -175,15 +175,24 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentIndex = 0;
   const items = Array.from(galleryItems);
 
+  function updateCounter(lightbox) {
+    const counter = lightbox.querySelector('.lightbox-counter');
+    if (counter) {
+      const total = items.filter(i => !i.querySelector('video')).length;
+      const pos = items.slice(0, currentIndex + 1).filter(i => !i.querySelector('video')).length;
+      counter.textContent = `${pos} / ${total}`;
+    }
+  }
+
   function openLightbox(index) {
     currentIndex = index;
     const item = items[currentIndex];
     if (item.style.display === 'none') return;
-    const img = item.querySelector('img');
-    if (!img) return;
+    const imgEl = item.querySelector('img');
+    if (!imgEl) return;
     const caption = item.querySelector('.gallery-overlay span');
-    const src = img.getAttribute('src');
-    const alt = img.getAttribute('alt');
+    const src = imgEl.getAttribute('src');
+    const alt = imgEl.getAttribute('alt');
     const text = caption ? caption.textContent : alt;
 
     const existing = document.querySelector('.lightbox');
@@ -195,11 +204,46 @@ document.addEventListener('DOMContentLoaded', () => {
       <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
       <button class="lightbox-nav lightbox-nav-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
       <button class="lightbox-nav lightbox-nav-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+      <div class="lightbox-spinner"></div>
       <img class="lightbox-img" src="${src}" alt="${alt}">
       <div class="lightbox-caption">${text}</div>
+      <div class="lightbox-counter"></div>
     `;
 
     document.body.appendChild(lightbox);
+
+    // Zoom + spinner handling
+    const lbImg = lightbox.querySelector('.lightbox-img');
+    const spinner = lightbox.querySelector('.lightbox-spinner');
+
+    function imgLoaded() {
+      lbImg.classList.add('loaded');
+      spinner.style.display = 'none';
+    }
+
+    if (lbImg.complete) {
+      imgLoaded();
+    } else {
+      lbImg.onload = imgLoaded;
+      lbImg.onerror = () => {
+        spinner.style.display = 'none';
+        lbImg.style.opacity = '1';
+      };
+    }
+
+    updateCounter(lightbox);
+
+    // Touch swipe
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        navigateLightbox(diff > 0 ? 1 : -1);
+      }
+    }, { passive: true });
 
     requestAnimationFrame(() => {
       lightbox.classList.add('open');
@@ -224,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentIndex < 0) currentIndex = items.length - 1;
     if (currentIndex >= items.length) currentIndex = 0;
     const item = items[currentIndex];
-    if (item.style.display === 'none') {
+    if (item.style.display === 'none' || item.querySelector('video')) {
       navigateLightbox(direction);
       return;
     }
