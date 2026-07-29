@@ -1111,6 +1111,62 @@ ul {
   color: var(--color-white);
 }
 
+/* ===== SIZE GUIDE ===== */
+.size-guide {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--color-border);
+}
+
+.size-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.size-guide-item {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.size-guide-item:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px var(--color-gold), var(--shadow-lg);
+}
+
+.size-guide-item img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3/4;
+  object-fit: contain;
+  padding: 20px;
+  background: var(--color-white);
+}
+
+.size-guide-label {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .size-guide-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+}
+
 /* ===== PRODUCT DETAIL ===== */
 .product-detail {
   padding: 80px 0;
@@ -2397,7 +2453,71 @@ ul {
   right: 20px;
 }
 
+/* ===== SIZE GUIDE VIEWER ===== */
+.size-viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  padding: 40px;
+  cursor: zoom-out;
+}
+
+.size-viewer.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.size-viewer img {
+  max-width: 95vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  user-select: none;
+}
+
+.size-viewer-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 1;
+}
+
+.size-viewer-close:hover {
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.15);
+}
+
 @media (max-width: 768px) {
+  .size-viewer {
+    padding: 16px;
+  }
+  .size-viewer-close {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+}
   .lightbox {
     padding: 20px;
   }
