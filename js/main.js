@@ -1,4 +1,4 @@
-// ===== PAGE FADE =====
+﻿// ===== PAGE FADE =====
 window.addEventListener('load', () => {
   const fade = document.querySelector('.page-fade');
   if (fade) {
@@ -96,7 +96,7 @@ function initTestimonials() {
 
   function goTo(index) {
     current = index;
-    track.style.transform = `translateX(-${current * 100}%)`;
+    track.style.transform = 'translateX(-${current * 100}%)';
     dots.forEach((dot, i) => {
       dot.classList.toggle('active', i === current);
     });
@@ -166,36 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             item.style.display = 'none';
           }
-  });
-});
-
-// ===== SIZE GUIDE VIEWER =====
-function openSizeViewer(imgEl) {
-  const overlay = document.createElement('div');
-  overlay.className = 'size-viewer';
-  overlay.innerHTML = `
-    <button class="size-viewer-close" aria-label="Close">&times;</button>
-    <img src="${imgEl.getAttribute('src')}" alt="${imgEl.getAttribute('alt') || ''}">
-  `;
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay || e.target.closest('.size-viewer-close')) {
-      overlay.classList.remove('open');
-      overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
-      document.body.style.overflow = '';
-    }
-  });
-  document.addEventListener('keydown', function escHandler(e) {
-    if (e.key === 'Escape') {
-      overlay.classList.remove('open');
-      overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
-      document.body.style.overflow = '';
-      document.removeEventListener('keydown', escHandler);
-    }
-  });
-  document.body.appendChild(overlay);
-  document.body.style.overflow = 'hidden';
-  requestAnimationFrame(() => overlay.classList.add('open'));
-}
+        });
+      });
     });
   }
 
@@ -368,3 +340,31 @@ function openSizeViewer(imgEl) {
     if (e.key === 'ArrowLeft') navigateLightbox(-1);
   });
 });
+
+// ===== SIZE GUIDE VIEWER =====
+function openSizeViewer(imgEl) {
+  const overlay = document.createElement('div');
+  overlay.className = 'size-viewer';
+  overlay.innerHTML = `
+    <button class="size-viewer-close" aria-label="Close">&times;</button>
+    <img src="${imgEl.getAttribute('src')}" alt="${imgEl.getAttribute('alt') || ''}">
+  `;
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay || e.target.closest('.size-viewer-close')) {
+      overlay.classList.remove('open');
+      overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+      document.body.style.overflow = '';
+    }
+  });
+  document.addEventListener('keydown', function escHandler(e) {
+    if (e.key === 'Escape') {
+      overlay.classList.remove('open');
+      overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', escHandler);
+    }
+  });
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => overlay.classList.add('open'));
+}
