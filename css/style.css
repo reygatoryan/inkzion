@@ -1464,6 +1464,125 @@ ul {
   border: 1px solid var(--color-gold);
 }
 
+/* ===== GALLERY HORIZONTAL STRIP ===== */
+.gallery-strip-wrapper {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.gallery-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 0;
+  scrollbar-width: none;
+}
+
+.gallery-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.strip-item {
+  flex: 0 0 auto;
+  min-width: 240px;
+  height: 260px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  position: relative;
+  scroll-snap-align: start;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.strip-item:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px var(--color-gold), var(--shadow-md);
+}
+
+.strip-item img,
+.strip-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.strip-item:hover img,
+.strip-item:hover .strip-media video {
+  transform: scale(1.06);
+}
+
+.strip-media {
+  width: 100%;
+  height: 100%;
+}
+
+.strip-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 14px;
+  background: linear-gradient(to top, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.6) 60%, transparent 100%);
+  color: var(--color-white);
+  font-size: 0.82rem;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.strip-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.gallery-strip-wrapper:hover .strip-arrow {
+  opacity: 1;
+}
+
+.strip-arrow:hover {
+  background: var(--color-white);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.strip-arrow-prev {
+  left: -18px;
+}
+
+.strip-arrow-next {
+  right: -18px;
+}
+
+@media (max-width: 768px) {
+  .strip-item {
+    min-width: 180px;
+    height: 200px;
+  }
+  .strip-arrow {
+    display: none;
+  }
+}
+
 /* ===== FAQS PAGE ===== */
 .faqs-list {
   max-width: 800px;

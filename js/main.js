@@ -200,6 +200,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ---- Horizontal Strip ----
+  const strip = document.getElementById('galleryStrip');
+  const prevBtn = document.querySelector('.strip-arrow-prev');
+  const nextBtn = document.querySelector('.strip-arrow-next');
+
+  if (strip && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+      const item = strip.querySelector('.strip-item');
+      if (item) {
+        strip.scrollBy({ left: -item.offsetWidth - 12, behavior: 'smooth' });
+      }
+    });
+    nextBtn.addEventListener('click', () => {
+      const item = strip.querySelector('.strip-item');
+      if (item) {
+        strip.scrollBy({ left: item.offsetWidth + 12, behavior: 'smooth' });
+      }
+    });
+
+    strip.querySelectorAll('.strip-item').forEach(el => {
+      el.addEventListener('click', (e) => {
+        if (el.querySelector('video')) return;
+        const idx = parseInt(el.dataset.index, 10);
+        openLightbox(idx);
+      });
+    });
+  }
+
   // ---- Lightbox ----
   let currentIndex = 0;
   const items = Array.from(galleryItems);
