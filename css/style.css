@@ -1388,11 +1388,12 @@ ul {
 }
 
 .gallery-grid {
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
 }
 
 .gallery-item {
-  margin-bottom: 16px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-bg-alt);
@@ -1400,18 +1401,20 @@ ul {
   transition: var(--transition);
   cursor: pointer;
   position: relative;
+  aspect-ratio: 4/3;
 }
 
 .gallery-item img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
 }
 
 .gallery-media {
   width: 100%;
-  aspect-ratio: 16/9;
+  height: 100%;
   display: flex;
 }
 
@@ -1803,7 +1806,10 @@ ul {
     font-size: 2.5rem;
   }
 
-  
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -1891,6 +1897,10 @@ ul {
   }
 
   .product-specs {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
     grid-template-columns: 1fr;
   }
 }
