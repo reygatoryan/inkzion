@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const featuredContainer = document.getElementById('featuredProducts');
   if (featuredContainer) {
     await loadProducts();
-    const featured = allProducts.slice(0, 3);
+    const featured = allProducts.filter(p => ['basketball-jersey-full-set', 'giveaways', 'vinyl-sticker'].includes(p.id));
     renderProducts(featured, 'featuredProducts');
   }
 });
