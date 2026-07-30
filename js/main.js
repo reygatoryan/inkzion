@@ -72,41 +72,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// ===== TESTIMONIAL CAROUSEL =====
-function initTestimonials() {
-  const track = document.querySelector('.testimonials-track');
-  const dots = document.querySelectorAll('.testimonial-dot');
-  if (!track || !dots.length) return;
-
-  let current = 0;
-  const total = dots.length;
-  let interval;
-
-  function goTo(index) {
-    current = index;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === current);
-    });
-  }
-
-  function next() {
-    goTo((current + 1) % total);
-  }
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      goTo(i);
-      clearInterval(interval);
-      interval = setInterval(next, 5000);
-    });
-  });
-
-  interval = setInterval(next, 5000);
-}
-
-document.addEventListener('DOMContentLoaded', initTestimonials);
-
 // ===== FAQ ACCORDION =====
 document.addEventListener('click', (e) => {
   const question = e.target.closest('.faq-question');
