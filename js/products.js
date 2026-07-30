@@ -145,6 +145,12 @@ async function initProductsPage() {
   await loadProducts();
   renderProducts(allProducts);
   initFilters();
+
+  const filterParam = new URLSearchParams(window.location.search).get('filter');
+  if (filterParam) {
+    const btn = document.querySelector(`.filter-btn[data-filter="${filterParam}"]`);
+    if (btn) btn.click();
+  }
 }
 
 // ===== AUTO-INIT ON APPROPRIATE PAGES =====

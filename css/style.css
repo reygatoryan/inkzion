@@ -167,17 +167,6 @@ ul {
   transform: translateY(-2px);
 }
 
-.btn-success {
-  background: var(--color-success);
-  color: var(--color-white);
-}
-
-.btn-success:hover {
-  background: #047857;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
-}
-
 .btn-sm {
   padding: 8px 20px;
   font-size: 0.85rem;

@@ -73,10 +73,4 @@ function initHeroParticles() {
 
 document.addEventListener('DOMContentLoaded', initHeroParticles);
 
-// ===== SMOOTH SCROLL FOR ALL INTERNAL LINKS =====
-document.addEventListener('click', (e) => {
-  const link = e.target.closest('a[href^="/"]');
-  if (link && link.hostname === window.location.hostname) {
-    // Let default navigation happen
-  }
-});
+

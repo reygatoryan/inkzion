@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
   const attachments = [];
 
   await new Promise((resolve, reject) => {
-    const busboy = Busboy({ headers: req.headers });
+    const busboy = Busboy({ headers: req.headers, limits: { fileSize: 10 * 1024 * 1024 } });
 
     busboy.on('field', (name, val) => {
       fields[name] = val;

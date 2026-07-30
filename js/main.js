@@ -72,18 +72,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
-document.addEventListener('click', (e) => {
-  const link = e.target.closest('a[href^="#"]');
-  if (link) {
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-});
-
 // ===== TESTIMONIAL CAROUSEL =====
 function initTestimonials() {
   const track = document.querySelector('.testimonials-track');
@@ -96,7 +84,7 @@ function initTestimonials() {
 
   function goTo(index) {
     current = index;
-    track.style.transform = 'translateX(-${current * 100}%)';
+    track.style.transform = `translateX(-${current * 100}%)`;
     dots.forEach((dot, i) => {
       dot.classList.toggle('active', i === current);
     });
