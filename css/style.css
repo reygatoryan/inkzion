@@ -211,7 +211,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-heading);
+  font-family: 'Plus Jakarta Sans', var(--font-heading);
   font-weight: 800;
   font-size: 1.4rem;
   color: var(--color-white);
@@ -225,11 +225,14 @@ ul {
 .logo-icon {
   width: 48px;
   height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .logo-icon img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .logo span {
@@ -899,6 +902,13 @@ ul {
   color: var(--color-primary);
 }
 
+.footer-logo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .footer-desc {
   font-size: 0.9rem;
   line-height: 1.8;
@@ -1057,12 +1067,40 @@ ul {
   margin: 0 auto;
 }
 
+.page-hero h1::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--color-gold);
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  opacity: 0.06;
+  bottom: -80px;
+  left: -80px;
+  pointer-events: none;
+  animation: pageHeroFloat 10s ease-in-out infinite;
+}
+
+@keyframes pageHeroFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.1); }
+}
+
 .breadcrumb {
   display: flex;
   justify-content: center;
   gap: 8px;
   font-size: 0.9rem;
-  color: #64748b;
   margin-top: 16px;
 }
 
@@ -1074,8 +1112,13 @@ ul {
   color: var(--color-primary);
 }
 
+.breadcrumb span {
+  color: var(--color-gold);
+}
+
 .breadcrumb .current {
-  color: var(--color-white);
+  color: var(--color-gold);
+  font-weight: 600;
 }
 
 /* ===== PRODUCTS PAGE ===== */
