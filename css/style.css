@@ -706,10 +706,42 @@ ul {
   top: 50%;
   left: 10px;
   right: 10px;
-  height: 2px;
   transform: translateY(-50%);
-  background: linear-gradient(90deg, var(--color-gold) 0%, rgba(255, 255, 255, 0.2) 100%);
-  border-radius: 2px;
+  display: flex;
+  gap: 6px;
+}
+
+.connector-segment {
+  position: relative;
+  flex: 1;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+.connector-segment.done {
+  background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+.connector-segment.active {
+  background: linear-gradient(90deg, var(--color-gold) 0%, rgba(212, 175, 55, 0.35) 100%);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.45);
+}
+
+.connector-segment.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  animation: connector-shimmer 1.6s linear infinite;
+}
+
+@keyframes connector-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .process-node {

@@ -85,10 +85,15 @@ function initProcessSlider() {
   let index = 0;
   let timer = null;
   const nodes = Array.from(document.querySelectorAll('.process-connector .process-node'));
+  const segments = Array.from(document.querySelectorAll('.connector-segment'));
 
   function updateActive() {
     steps.forEach((step, i) => step.classList.toggle('active', i === index));
     nodes.forEach((node, i) => node.classList.toggle('active', i === index));
+    segments.forEach((segment, i) => {
+      segment.classList.toggle('done', i < index);
+      segment.classList.toggle('active', i === index);
+    });
   }
 
   function goTo(i) {
