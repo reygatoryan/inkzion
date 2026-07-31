@@ -879,6 +879,23 @@ ul {
   transform: translateY(-3px);
 }
 
+.footer-social a.footer-faq-btn {
+  width: auto;
+  min-width: 60px;
+  padding: 0 16px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  border: 2px solid var(--color-gold);
+  border-radius: 50px;
+  background: transparent;
+}
+
+.footer-social a.footer-faq-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-text);
+}
+
 .footer-heading {
   font-family: var(--font-heading);
   font-size: 1rem;
