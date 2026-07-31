@@ -84,10 +84,17 @@ function initProcessSlider() {
 
   let index = 0;
   let timer = null;
+  const nodes = Array.from(document.querySelectorAll('.process-connector .process-node'));
+
+  function updateActive() {
+    steps.forEach((step, i) => step.classList.toggle('active', i === index));
+    nodes.forEach((node, i) => node.classList.toggle('active', i === index));
+  }
 
   function goTo(i) {
     index = (i + steps.length) % steps.length;
     track.style.transform = `translateX(-${index * 100}%)`;
+    updateActive();
   }
 
   function next() {
@@ -134,6 +141,8 @@ function initProcessSlider() {
     });
   }, { threshold: 0.3 });
   observer.observe(slider);
+
+  updateActive();
 }
 
 document.addEventListener('DOMContentLoaded', initProcessSlider);
