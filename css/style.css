@@ -758,33 +758,11 @@ ul {
   text-align: center;
   position: relative;
   transition: var(--transition);
-  overflow: hidden;
 }
 
 .process-step:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-}
-
-.step-progress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: 0;
-  background: linear-gradient(90deg, var(--color-gold), #f5d876);
-  border-radius: 0 3px 3px 0;
-  opacity: 0;
-}
-
-.process-step.active .step-progress {
-  opacity: 1;
-  animation: step-progress 3.5s linear forwards;
-}
-
-@keyframes step-progress {
-  from { width: 0; }
-  to { width: 100%; }
 }
 
 .step-number {
