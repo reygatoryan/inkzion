@@ -692,10 +692,18 @@ ul {
 }
 
 /* ===== HOW IT WORKS / PROCESS ===== */
-.process-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+.process-slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.process-track {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.process-track .process-step {
+  flex: 0 0 100%;
 }
 
 .process-step {
@@ -748,18 +756,6 @@ ul {
   font-size: 0.9rem;
   color: var(--color-text-muted);
   line-height: 1.6;
-}
-
-@media (max-width: 992px) {
-  .process-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 576px) {
-  .process-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ===== CTA SECTION ===== */

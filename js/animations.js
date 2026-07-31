@@ -73,4 +73,69 @@ function initHeroParticles() {
 
 document.addEventListener('DOMContentLoaded', initHeroParticles);
 
+// ===== PROCESS SLIDER (How It Works) =====
+function initProcessSlider() {
+  const slider = document.querySelector('.process-slider');
+  const track = document.querySelector('.process-track');
+  if (!slider || !track) return;
+
+  const steps = Array.from(track.children);
+  if (steps.length < 2) return;
+
+  let index = 0;
+  let timer = null;
+
+  function goTo(i) {
+    index = (i + steps.length) % steps.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function next() {
+    goTo(index + 1);
+  }
+
+  function start() {
+    stop();
+    timer = setInterval(next, 3500);
+  }
+
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  slider.addEventListener('mouseenter', stop);
+  slider.addEventListener('mouseleave', start);
+
+  let touchStartX = 0;
+  slider.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    stop();
+  }, { passive: true });
+  slider.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 40) {
+      goTo(index + (diff > 0 ? 1 : -1));
+    }
+    start();
+  }, { passive: true });
+
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stop() : start();
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        start();
+      } else {
+        stop();
+      }
+    });
+  }, { threshold: 0.3 });
+  observer.observe(slider);
+}
+
+document.addEventListener('DOMContentLoaded', initProcessSlider);
+
 
