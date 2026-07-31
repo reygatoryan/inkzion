@@ -740,6 +740,8 @@ ul {
 .process-slider {
   position: relative;
   overflow: hidden;
+  padding-top: 16px;
+  margin-top: -16px;
 }
 
 .process-track {
