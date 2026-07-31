@@ -753,25 +753,20 @@ ul {
 
 .process-step {
   background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   border-radius: var(--radius-lg);
   padding: 44px 32px 36px;
   text-align: center;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.14);
   transition: var(--transition);
   overflow: hidden;
 }
 
 .process-step:hover {
   transform: translateY(-4px);
-  border-color: rgba(212, 175, 55, 0.5);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
 .process-step.active {
-  border-color: var(--color-gold);
   box-shadow: 0 0 30px rgba(212, 175, 55, 0.25), 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
