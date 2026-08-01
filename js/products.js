@@ -1,4 +1,6 @@
 let allProducts = [];
+let allCategories = [];
+const basePath = document.body.dataset.category ? '../' : '';
 
 // ===== LOAD PRODUCTS =====
 async function loadProducts() {
@@ -6,11 +8,17 @@ async function loadProducts() {
     const res = await fetch('data/products.json');
     const data = await res.json();
     allProducts = data.products;
+    allCategories = data.categories;
     return data;
   } catch (err) {
     console.error('Failed to load products:', err);
-    return { products: [] };
+    return { products: [], categories: [] };
   }
+}
+
+function slugToName(slug) {
+  const cat = allCategories.find(c => c.slug === slug);
+  return cat ? cat.name : '';
 }
 
 // ===== RENDER PRODUCT CARDS =====
@@ -24,7 +32,7 @@ function renderProducts(products, containerId = 'productsContainer') {
   }
 
   container.innerHTML = products.map(product => `
-    <div class="product-card" onclick="window.location.href='product-detail.html?product=${product.id}'">
+    <div class="product-card" onclick="window.location.href='${basePath}product-detail.html?product=${product.id}'">
       <div class="product-card-image">
         <img src="${product.image}" alt="${product.name}" loading="lazy">
       </div>
@@ -38,10 +46,10 @@ function renderProducts(products, containerId = 'productsContainer') {
           <span><i class="fas fa-clock"></i> ${product.productionTime}</span>
         </div>
         <div class="product-card-actions">
-          <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); window.location.href='inquiry.html?product=${product.id}'">
+          <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); window.location.href='${basePath}inquiry.html?product=${product.id}'">
             <i class="fas fa-file-invoice"></i> Request Quote
           </button>
-          <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); window.location.href='contact.html?subject=${encodeURIComponent('Inquiry: ' + product.name)}'">
+          <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); window.location.href='${basePath}contact.html?subject=${encodeURIComponent('Inquiry: ' + product.name)}'">
             <i class="fas fa-envelope"></i> Email Inquiry
           </button>
         </div>
@@ -50,7 +58,31 @@ function renderProducts(products, containerId = 'productsContainer') {
   `).join('');
 }
 
-// ===== PRODUCT FILTERING =====
+// ===== RENDER CATEGORY CARDS =====
+function renderCategoryCards(containerId = 'categoriesContainer') {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.innerHTML = allCategories.map(cat => {
+    const products = allProducts.filter(p => p.category === cat.name);
+    const image = products[0] ? products[0].image : '';
+    return `
+      <a href="products/${cat.slug}.html" class="category-card" data-aos="fade-up">
+        <div class="category-card-image">
+          <img src="${image}" alt="${cat.name}" loading="lazy">
+        </div>
+        <div class="category-card-body">
+          <h3 class="category-card-title">${cat.name}</h3>
+          <p class="category-card-desc">${cat.description}</p>
+          <span class="category-card-count">${products.length} product${products.length === 1 ? '' : 's'}</span>
+          <span class="category-card-link">Browse Products <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    `;
+  }).join('');
+}
+
+// ===== PRODUCT FILTERING (legacy pill buttons) =====
 function initFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   if (!filterBtns.length) return;
@@ -75,6 +107,36 @@ function initFilters() {
       }
     });
   });
+}
+
+// ===== CATEGORY PAGE (products/<slug>.html) =====
+async function initCategoryPage() {
+  const body = document.body;
+  const slug = body.dataset.category;
+  if (!slug) return;
+
+  await loadProducts();
+  const category = allCategories.find(c => c.slug === slug);
+  if (!category) return;
+
+  const products = allProducts.filter(p => p.category === category.name);
+
+  document.title = `${category.name} - InKZion Spectrum Ads`;
+
+  const heroTitle = document.getElementById('categoryTitle');
+  if (heroTitle) heroTitle.textContent = category.name;
+
+  const heroDesc = document.getElementById('categoryDesc');
+  if (heroDesc) heroDesc.textContent = category.description;
+
+  const breadcrumbEl = document.getElementById('breadcrumbCategory');
+  if (breadcrumbEl) breadcrumbEl.textContent = category.name;
+
+  renderProducts(products);
+
+  if (window.AOS) {
+    window.AOS.refresh();
+  }
 }
 
 // ===== PRODUCT DETAIL PAGE =====
@@ -143,14 +205,7 @@ async function loadProductDetail() {
 // ===== INIT PRODUCTS PAGE =====
 async function initProductsPage() {
   await loadProducts();
-  renderProducts(allProducts);
-  initFilters();
-
-  const filterParam = new URLSearchParams(window.location.search).get('filter');
-  if (filterParam) {
-    const btn = document.querySelector(`.filter-btn[data-filter="${filterParam}"]`);
-    if (btn) btn.click();
-  }
+  renderCategoryCards();
 }
 
 // ===== AUTO-INIT ON APPROPRIATE PAGES =====
@@ -159,6 +214,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (path === 'products.html') {
     initProductsPage();
+  }
+
+  if (document.body.dataset.category) {
+    initCategoryPage();
   }
 
   if (path === 'product-detail.html') {
@@ -201,4 +260,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderProducts(featured, 'featuredProducts');
   }
 });
-
