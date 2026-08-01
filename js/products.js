@@ -5,7 +5,7 @@ const basePath = document.body.dataset.category ? '../' : '';
 // ===== LOAD PRODUCTS =====
 async function loadProducts() {
   try {
-    const res = await fetch('data/products.json');
+    const res = await fetch(basePath + 'data/products.json');
     const data = await res.json();
     allProducts = data.products;
     allCategories = data.categories;
@@ -34,7 +34,7 @@ function renderProducts(products, containerId = 'productsContainer') {
   container.innerHTML = products.map(product => `
     <div class="product-card" onclick="window.location.href='${basePath}product-detail.html?product=${product.id}'">
       <div class="product-card-image">
-        <img src="${product.image}" alt="${product.name}" loading="lazy">
+        <img src="${basePath}${product.image}" alt="${product.name}" loading="lazy">
       </div>
       <div class="product-card-body">
         <div class="product-card-category">${product.category}</div>
