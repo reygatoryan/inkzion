@@ -42,8 +42,8 @@ module.exports = async (req, res) => {
 
   const { name, email, phone, company, product, quantity, deadline, details } = fields;
 
-  if (!name || !email || !details) {
-    res.writeHead(302, { Location: '/inquiry.html?status=error&msg=Name,+email,+and+project+details+are+required.' });
+  if (!name || !email || !phone || !product || !quantity || !deadline || !details) {
+    res.writeHead(302, { Location: '/inquiry.html?status=error&msg=Please+fill+up+all+the+required+fields.' });
     res.end();
     return;
   }

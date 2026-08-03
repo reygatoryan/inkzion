@@ -8,15 +8,15 @@ $to = "ryanreygato@gmail.com";
 
 $name = htmlspecialchars(trim($_POST["name"] ?? ""));
 $email = htmlspecialchars(trim($_POST["email"] ?? ""));
-$phone = htmlspecialchars(trim($_POST["phone"] ?? "N/A"));
+$phone = htmlspecialchars(trim($_POST["phone"] ?? ""));
 $company = htmlspecialchars(trim($_POST["company"] ?? "N/A"));
-$product = htmlspecialchars(trim($_POST["product"] ?? "N/A"));
-$quantity = htmlspecialchars(trim($_POST["quantity"] ?? "N/A"));
-$deadline = htmlspecialchars(trim($_POST["deadline"] ?? "N/A"));
+$product = htmlspecialchars(trim($_POST["product"] ?? ""));
+$quantity = htmlspecialchars(trim($_POST["quantity"] ?? ""));
+$deadline = htmlspecialchars(trim($_POST["deadline"] ?? ""));
 $details = htmlspecialchars(trim($_POST["details"] ?? ""));
 
-if (empty($name) || empty($email) || empty($details)) {
-    header("Location: ../inquiry.html?status=error&msg=Name, email, and project details are required.");
+if (empty($name) || empty($email) || empty($phone) || empty($product) || empty($quantity) || empty($deadline) || empty($details)) {
+    header("Location: ../inquiry.html?status=error&msg=Please fill up all the required fields.");
     exit;
 }
 

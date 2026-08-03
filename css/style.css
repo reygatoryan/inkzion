@@ -2316,6 +2316,38 @@ ul {
   border: 1px solid var(--color-border);
 }
 
+/* ===== FORM VALIDATION ===== */
+.form-input.invalid,
+.form-select.invalid,
+.form-textarea.invalid {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.form-toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  z-index: 9999;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 90vw;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.form-toast-error {
+  background: #dc2626;
+}
+
+.form-toast.hide {
+  opacity: 0;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .hero .container {

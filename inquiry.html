@@ -77,7 +77,7 @@
         </div>
         <div data-aos="fade-left">
           <div class="form-card">
-            <form action="/api/send-inquiry" method="POST" id="inquiryForm" enctype="multipart/form-data">
+            <form action="/api/send-inquiry" method="POST" id="inquiryForm" enctype="multipart/form-data" novalidate>
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="name">Full Name</label>
@@ -91,7 +91,7 @@
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="phone">Phone Number</label>
-                  <input type="tel" class="form-input" id="phone" name="phone" placeholder="+639754263237">
+                  <input type="tel" class="form-input" id="phone" name="phone" required placeholder="+639754263237">
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="company">Company (Optional)</label>
@@ -100,7 +100,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label" for="product">Product of Interest</label>
-                <select class="form-select" id="product" name="product">
+                <select class="form-select" id="product" name="product" required>
                   <option value="">Select a product...</option>
                   <option value="Full Sublimation Round Neck Shirt">Full Sublimation Round Neck Shirt</option>
                   <option value="Polo Shirt">Polo Shirt</option>
@@ -124,11 +124,11 @@
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="quantity">Estimated Quantity</label>
-                  <input type="number" class="form-input" id="quantity" name="quantity" min="1" placeholder="e.g. 50">
+                  <input type="number" class="form-input" id="quantity" name="quantity" min="1" required placeholder="e.g. 50">
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="deadline">Target Deadline</label>
-                  <input type="date" class="form-input" id="deadline" name="deadline">
+                  <input type="date" class="form-input" id="deadline" name="deadline" required>
                 </div>
               </div>
               <div class="form-group">
@@ -200,6 +200,72 @@
       document.body.prepend(alert);
       setTimeout(() => alert.remove(), 5000);
     }
+
+    (function () {
+      const form = document.getElementById('inquiryForm');
+      if (!form) return;
+
+      const requiredFields = [
+        { el: document.getElementById('name'), label: 'Full Name' },
+        { el: document.getElementById('email'), label: 'Email Address' },
+        { el: document.getElementById('phone'), label: 'Phone Number' },
+        { el: document.getElementById('product'), label: 'Product of Interest' },
+        { el: document.getElementById('quantity'), label: 'Estimated Quantity' },
+        { el: document.getElementById('deadline'), label: 'Target Deadline' },
+        { el: document.getElementById('details'), label: 'Project Details' }
+      ];
+
+      function showAlert(message) {
+        const existing = document.querySelector('.form-toast');
+        if (existing) existing.remove();
+        const toast = document.createElement('div');
+        toast.className = 'form-toast form-toast-error';
+        toast.textContent = message;
+        document.body.prepend(toast);
+        setTimeout(() => {
+          toast.classList.add('hide');
+          setTimeout(() => toast.remove(), 300);
+        }, 5000);
+      }
+
+      function markInvalid(el) {
+        el.classList.add('invalid');
+        el.addEventListener('input', function onFix() {
+          if (el.value.trim()) {
+            el.classList.remove('invalid');
+            el.removeEventListener('input', onFix);
+          }
+        }, { once: true });
+      }
+
+      form.addEventListener('submit', (e) => {
+        const missing = [];
+
+        requiredFields.forEach(({ el, label }) => {
+          const value = el.value ? el.value.trim() : '';
+          if (!value) {
+            missing.push(label);
+            markInvalid(el);
+          } else {
+            el.classList.remove('invalid');
+          }
+        });
+
+        const emailEl = document.getElementById('email');
+        const email = emailEl ? emailEl.value.trim() : '';
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          missing.push('a valid email address');
+          markInvalid(emailEl);
+        }
+
+        if (missing.length) {
+          e.preventDefault();
+          showAlert('Please fill up all the required fields: ' + missing.join(', ') + '.');
+          const firstInvalid = form.querySelector('.invalid');
+          if (firstInvalid) firstInvalid.focus();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
