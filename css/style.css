@@ -203,6 +203,7 @@ ul {
   font-family: 'Plus Jakarta Sans', var(--font-heading);
   font-weight: 800;
   font-size: 1.4rem;
+  letter-spacing: -0.03em;
   color: var(--color-white);
   transition: var(--transition);
 }
@@ -225,7 +226,12 @@ ul {
 }
 
 .logo span {
-  color: var(--color-primary);
+  background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .nav {
