@@ -327,7 +327,7 @@ ul {
   display: flex;
   align-items: center;
   background: linear-gradient(135deg, rgba(15,23,42,0.75) 0%, rgba(30,41,59,0.8) 50%, rgba(15,23,42,0.85) 100%),
-              url('../inkzion-assets/website-bg.png');
+              url('../inkzion-assets/website-bg2.png');
   background-size: cover;
   background-position: center;
   overflow: hidden;
