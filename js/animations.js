@@ -40,6 +40,7 @@ function initCountUp() {
 }
 
 function animateCount(el, target) {
+  const suffix = el.dataset.suffix || '';
   let current = 0;
   const increment = Math.ceil(target / 60);
   const timer = setInterval(() => {
@@ -48,7 +49,7 @@ function animateCount(el, target) {
       current = target;
       clearInterval(timer);
     }
-    el.textContent = current + (target >= 1000 ? '+' : '');
+    el.textContent = current + (current === target ? suffix : '');
   }, 25);
 }
 
