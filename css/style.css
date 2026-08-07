@@ -1209,27 +1209,42 @@ ul {
 }
 
 .breadcrumb {
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
-  font-size: 0.9rem;
+  gap: 2px;
   margin-top: 16px;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
 }
 
 .breadcrumb a {
-  color: #94a3b8;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: #cbd5e1;
+  font-weight: 500;
+  transition: var(--transition);
 }
 
 .breadcrumb a:hover {
-  color: var(--color-primary);
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--color-gold);
 }
 
-.breadcrumb span {
-  color: var(--color-gold);
+.breadcrumb .sep {
+  color: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
 }
 
 .breadcrumb .current {
-  color: var(--color-gold);
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+  color: #1e293b;
   font-weight: 600;
 }
 
