@@ -958,6 +958,8 @@ ul {
   flex-direction: column;
   gap: 20px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .visit-info-item {
@@ -967,6 +969,10 @@ ul {
   color: var(--color-text);
   line-height: 1.7;
   font-size: 0.95rem;
+}
+
+.visit-info-item span {
+  overflow-wrap: anywhere;
 }
 
 .visit-info-icon {
@@ -2507,6 +2513,14 @@ ul {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .visit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .visit-grid > * {
+    min-width: 0;
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -2930,9 +2944,11 @@ ul {
     grid-template-columns: 1fr;
   }
   .map-embed {
-    aspect-ratio: 4 / 3;
-    min-height: 340px;
-    height: auto;
+    aspect-ratio: auto;
+    height: 320px;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
   }
   .map-embed iframe {
     filter: none;
